@@ -4,30 +4,16 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { SidebarContext } from "../../../context/SidebarContext";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { addDays } from "date-fns";
-import { DateRange } from "react-date-range";
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
 
 const AreaTop = () => {
   const { openSidebar } = useContext(SidebarContext);
   const [startDate, setStartDate] = useState(new Date());
-
-  const [state, setState] = useState([
-    {
-      startDate: null,
-      endDate: null,//new Date(),//addDays(new Date(), 7),
-      key: "selection",
-    },
-  ]);
+  const [endDate, setEndDate] = useState(null);
 
   const [showDatePicker, setShowDatePicker] = useState(false);
   const dateRangeRef = useRef(null);
-
-  const handleInputClick = () => {
-    setShowDatePicker(true);
-  };
 
   const handleClickOutside = (event) => {
     if (dateRangeRef.current && !dateRangeRef.current.contains(event.target)) {
@@ -44,7 +30,7 @@ const AreaTop = () => {
 
   return (
     <section className="content-area-top">
-      <div className="area-top-l ">
+      <div className="area-top-l">
         <button
           className="sidebar-open-btn"
           type="button"
@@ -52,40 +38,43 @@ const AreaTop = () => {
         >
           <MdOutlineMenu size={24} />
         </button>
-        <h2 className="area-top-title">Dashboard</h2>
+        <h2 className="area-top-title">Logs Dashboard</h2>
       </div>
 
-      <div className="bar-chart" style={{
-        display: "flex", gap: "16px",
-        flexWrap: "wrap"
-      }}>
-        <div
-
-        >
-          <span className="input-lable">Start Date</span>
-          <input type="date" style={{ width: "160px", marginRight: '10px' }} className="date-range-wrapper" />
-          <span className="input-lable"> End Date</span>
-          <input type="date" style={{ width: "160px" }} />
+      <div className="filters-wrapper">
+        <div className="filter">
+          <label className="input-label">Start Date</label>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            dateFormat="MM/dd/yyyy"
+            className="date-input"
+            placeholderText="Select date"
+          />
         </div>
-        <div>
-          <span className="input-lable">Application Name</span>
-          <input style={{}} placeholder="Application Name" />
+        <div className="filter">
+          <label className="input-label">End Date</label>
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            dateFormat="MM/dd/yyyy"
+            className="date-input"
+            placeholderText="Select date"
+          />
         </div>
-        <div>
-          <span className="input-lable">Server Name</span>
-          <input style={{}} placeholder="Servaer Name" />
+        <div className="filter">
+          <label className="input-label">Server Name</label>
+          <input type="text" className="text-input" placeholder="Server Name" />
         </div>
-        <div>
-          <span className="input-lable">Application name</span>
-          <input style={{}} placeholder="Application Name" />
+        <div className="filter">
+          <label className="input-label">Application Name</label>
+          <input
+            type="text"
+            className="text-input"
+            placeholder="Application Name"
+          />
         </div>
-        <button className="load-btn" style={{ padding: "8px 20px", borderRadius: '4px', fontSize: '16px', fontWeight: "600" }}>
-          Load
-        </button>
-      </div>
-
-      <div>
-
+        <button className="load-btn">Load</button>
       </div>
     </section>
   );
