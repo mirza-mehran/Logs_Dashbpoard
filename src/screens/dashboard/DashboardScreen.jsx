@@ -6,22 +6,30 @@ import HealthCheckTable from "./HealthCheckTable";
 import TraceLogsTable from "./TraceLogsTable";
 import dayjs from "dayjs";
 import { Base_url } from '../../constants/url';
+import { useDashboardContext } from '../../context/DataContext';
 
 let currentDate = dayjs();
 let formattedDate = currentDate.format('YYYY-MM-DD');
 
-console.log(formattedDate); 
-
 const Dashboard = () => {
-  const [healthCheckLogs, setHealthCheckLogs] = useState(null);
-  const [errorLogs, setErrorLogs] = useState(null);
-  const [traceLogs, setTraceLogs] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const [errorLogsBarGraphData, setErrorLogsBarGraphData] = useState([]);
-  const [errorLogsGraphData, setErrorLogsGraphData] = useState([]);
-  const [traceLogsGraphData, setTraceLogsGraphData] = useState([]);
+  const {
+    healthCheckLogs,
+    setHealthCheckLogs,
+    errorLogs,
+    setErrorLogs,
+    traceLogs,
+    setTraceLogs,
+    loading,
+    setLoading,
+    error,
+    setError,
+    errorLogsBarGraphData,
+    setErrorLogsBarGraphData,
+    errorLogsGraphData,
+    setErrorLogsGraphData,
+    traceLogsGraphData,
+    setTraceLogsGraphData,
+  } = useDashboardContext();
 
 
 
@@ -31,17 +39,17 @@ const Dashboard = () => {
       const response = await axios.get(url,
         {
           params: {
-            StartDate:  filter?.StartDate || '2024-05-26' || formattedDate,
-            EndDate: filter?.EndDate|| formattedDate,
-            ...(filter?.ApplicationName && { ApplicationName :filter?.ApplicationName }),
+            StartDate: filter?.StartDate  || formattedDate,
+            EndDate: filter?.EndDate || formattedDate,
+            ...(filter?.ApplicationName && { ApplicationName: filter?.ApplicationName }),
             ...(filter?.ClientId && { ClientId: filter?.ClientId }),
-            ...(filter?.UserName && { UserName:filter?.UserName }),
-            ...(filter?.ServerName && { ServerName :filter?.ServerName}),
+            ...(filter?.UserName && { UserName: filter?.UserName }),
+            ...(filter?.ServerName && { ServerName: filter?.ServerName }),
           },
-        headers: {
-          'Accept': '*/*', 
-        }
-      });
+          headers: {
+            'Accept': '*/*',
+          }
+        });
 
       return response.data;
     } catch (error) {
@@ -49,7 +57,7 @@ const Dashboard = () => {
       throw error;
     }
   };
-  const handleButtonClick = async (filterData={}) => {
+  const handleButtonClick = async (filterData = {}) => {
     setLoading(true);
     try {
       console.log(filterData)
@@ -63,12 +71,12 @@ const Dashboard = () => {
         traceLogsGraphData,
 
       ] = await Promise.all([
-        fetchDataFromApi(filterData,  'HealthCheckLogs'),
-        fetchDataFromApi(filterData,  'ErrorLogs'),
-        fetchDataFromApi(filterData,  'TraceLogs'),
-        fetchDataFromApi(filterData,  'ErrorLogBarGraph'),
-        fetchDataFromApi(filterData,  'ErrorLogLineGraph'),
-        fetchDataFromApi(filterData,  'TraceLogOperationGraph'),
+        fetchDataFromApi(filterData, 'HealthCheckLogs'),
+        fetchDataFromApi(filterData, 'ErrorLogs'),
+        fetchDataFromApi(filterData, 'TraceLogs'),
+        fetchDataFromApi(filterData, 'ErrorLogBarGraph'),
+        fetchDataFromApi(filterData, 'ErrorLogLineGraph'),
+        fetchDataFromApi(filterData, 'TraceLogOperationGraph'),
       ]);
       console.log({
         healthCheckLogsData,
@@ -93,7 +101,7 @@ const Dashboard = () => {
     }
   };
   useEffect(() => {
-    if(!errorLogs){
+    if (!errorLogs) {
       handleButtonClick()
     }
   }, [])
@@ -101,16 +109,15 @@ const Dashboard = () => {
     <div className="content-area">
       {/* {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>} */}
-      <AreaTop  handleButtonClick={handleButtonClick} />
+      <AreaTop handleButtonClick={handleButtonClick} />
       <HealthCheckTable data={healthCheckLogs?.details || []} />
       <ErrorLogTable data={errorLogs?.details || []} />
       <TraceLogsTable data={traceLogs?.details || []} />
       <AreaCharts data={{
-        barChart:errorLogsBarGraphData?.details ||[],
-        LineChart:errorLogsGraphData?.details ||[],
-        TaceChart:traceLogsGraphData?.details ||[],
+        barChart: errorLogsBarGraphData?.details || [],
+        LineChart: errorLogsGraphData?.details || [],
+        TaceChart: traceLogsGraphData?.details || [],
       }} />
-      {/* <AreaTable title="Trace Logs"  tableData={{TABLE_HEADS:Trace_LOGs_Header,TABLE_DATA}}/> */}
     </div>
   );
 };

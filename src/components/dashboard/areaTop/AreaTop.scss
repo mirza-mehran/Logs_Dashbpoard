@@ -62,7 +62,7 @@
         border-radius: 4px;
         outline: none;
         color: var(--base-text-color);
-        // background-color: var(--light-color);
+        background-color: var(--secondary-color);
       }
 
       .input-label {
@@ -193,4 +193,10 @@
       }
     }
   }
+}
+.MuiFormControl-root > div {
+  border: 1px solid #ccc;
+}
+.MuiFormControl-root .MuiIconButton-edgeEnd > svg{
+  color: var(--text-color-inverted);
 }
