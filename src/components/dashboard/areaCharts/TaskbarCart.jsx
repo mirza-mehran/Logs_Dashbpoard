@@ -47,6 +47,7 @@ const TaskChart = ({ data }) => {
 
   return (
     <div className="bar-chart">
+      <div style={{marginBottom:"10px"}}> <h3>Trace Logs Bar Chart</h3></div>
       <div className="line-chart-wrapper">
         <ResponsiveContainer width="100%" height={300}>
           <BarChart

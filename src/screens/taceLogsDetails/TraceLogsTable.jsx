@@ -1,6 +1,7 @@
 import React from "react";
 import { AreaTable } from "../../components";
 import { Table, Tag } from 'antd';
+import dayjs from 'dayjs';
 
 
 // "clientID": 1028,
@@ -18,7 +19,14 @@ import { Table, Tag } from 'antd';
 
 const columns = [
     {
-        title: 'client ID',
+        title: 'Sr No',
+        dataIndex: 'id',
+        key: 'id',
+        render: (text, record, index) => index + 1,
+        sorter: (a, b) => a.number - b.number,
+      },
+    {
+        title: 'Client ID',
         dataIndex: 'clientID',
         key: 'clientID',
         sorter: (a, b) => a.clientID - b.clientID,
@@ -35,7 +43,7 @@ const columns = [
         sorter: (a, b) => a.operationId - b.operationId,
     },
     {
-        title: 'Duration',
+        title: 'Duration (sec)',
         dataIndex: 'duration',
         key: 'duration',
         sorter: (a, b) => a.duration - b.duration,
@@ -57,12 +65,15 @@ const columns = [
         dataIndex: 'operationStartDate',
         key: 'operationStartDate',
         sorter: (a, b) => a.operationStartDate - b.operationStartDate,
+        render: (operationStartDate) => dayjs(operationStartDate).format('YYYY-MM-DD HH:mm:ss'),
+
     },
     {
         title: 'Operation End Date',
         dataIndex: 'operationEndDate',
         key: 'operationEndDate',
         sorter: (a, b) => a.operationEndDate - b.operationEndDate,
+        render: (operationEndDate) => dayjs(operationEndDate).format('YYYY-MM-DD HH:mm:ss'),
     },
 ];
 

@@ -26,6 +26,7 @@ const AreaBarChart = ({data}) => {
 
   return (
     <div className="bar-chart">
+      <div style={{marginBottom:"10px"}}> <h3>Error Logs Bar Chart</h3></div>
       <div className="bar-chart-wrapper">
       <ResponsiveContainer width="100%" height={'100%'}>
     <BarChart
@@ -48,6 +49,7 @@ const AreaBarChart = ({data}) => {
 
         dataKey="noOfTime" fill="#156082" />
     </BarChart>
+    
   </ResponsiveContainer>
       </div>
     </div>

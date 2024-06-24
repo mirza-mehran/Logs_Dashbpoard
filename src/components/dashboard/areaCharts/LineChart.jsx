@@ -58,6 +58,7 @@ const LineChartPage = ({ data }) => {
   }))
   return (
     <div className="bar-chart">
+      <div style={{marginBottom:"10px"}}> <h3>Error Logs Line Chart</h3></div>
       <div className="line-chart-wrapper">
         <ResponsiveContainer width="100%" height={"100%"}>
           <LineChart data={filterData}
@@ -65,7 +66,7 @@ const LineChartPage = ({ data }) => {
           >
             <XAxis
               dataKey="time" padding={{ left: 30, right: 30 }} >
-              <Label value="time" offset={0} position="bottom" />
+              <Label value="Time" offset={0} position="bottom" />
             </XAxis>
             <YAxis
               label={{ value: 'No of errors', angle: -90, position: 'left' }}

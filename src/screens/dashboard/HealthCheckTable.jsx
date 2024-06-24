@@ -4,9 +4,10 @@ import dayjs from 'dayjs';
 
 const columns = [
   {
-    title: 'Number',
+    title: 'Sr No',
     dataIndex: 'id',
     key: 'id',
+    render: (text, record, index) => index + 1,
     sorter: (a, b) => a.number - b.number,
   },
   {
@@ -14,14 +15,14 @@ const columns = [
     dataIndex: 'applicationName',
     key: 'applicationName',
   },
-  {
-    title: 'createDate',
-    dataIndex: 'createDate',
-    key: 'createDate',
-    render: (createDate) => (
-      <span> {dayjs(createDate)?.format('YYYY-MM-DD')}</span>
-    ),
-  },
+  // {
+  //   title: 'CreateDate',
+  //   dataIndex: 'createDate',
+  //   key: 'createDate',
+  //   render: (createDate) => (
+  //     <span> {dayjs(createDate)?.format('YYYY-MM-DD')}</span>
+  //   ),
+  // },
   {
     title: 'Available',
     dataIndex: 'isAvailable',
@@ -53,16 +54,17 @@ const columns = [
     title: 'Server Name',
     dataIndex: 'serverName',
     key: 'serverName',
-  },
-  {
-    title: 'UserName',
-    dataIndex: 'username',
-    key: 'username',
-  },
+   },
+  // {
+  //   title: 'UserName',
+  //   dataIndex: 'username',
+  //   key: 'username',
+  // },
 ];
 
 const App = ({data}) => (
   <section className="content-area-table">
+     <div style={{marginBottom:"10px"}}> <h3>Health Check Logs</h3></div>
   <Table
     dataSource={data}
     columns={columns}
