@@ -60,18 +60,20 @@
     column-gap: 6px;
   }
 
-  .sidebar-brand-text{
-    text-transform: uppercase;
-    font-weight: 900;
-    color: var(--logo-color);
-    margin-bottom: 8px;
+  .sidebar-brand-logo{
+    width: 210px;
+    height: 80px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: "red";
+    // margin-bottom: 8px;
 
     @media(max-width: 1200px){
         display: none;
     }
 
     @media(max-width: 768px){
-        display: inline-block;
+      display: none;
     }
   }
 

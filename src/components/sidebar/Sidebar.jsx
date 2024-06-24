@@ -3,6 +3,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { LIGHT_THEME } from "../../constants/themeConstants";
 import LogoBlue from "../../assets/images/logo_blue.svg";
 import LogoWhite from "../../assets/images/logo_white.svg";
+import Logo from "../../assets/images/logo.png";
 import {
   MdOutlineAttachMoney,
   MdOutlineBarChart,
@@ -49,8 +50,9 @@ const Sidebar = () => {
     >
       <div className="sidebar-top">
         <div className="sidebar-brand">
-          <img src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
-          <span className="sidebar-brand-text">Dashboard</span>
+          <img  className="sidebar-brand-logo" src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
+          <img className="sidebar-brand-logo"  src={theme === LIGHT_THEME ? Logo : Logo} alt="logo" />
+          {/* <span >Dashboard</span> */}
         </div>
         <button className="sidebar-close-btn" onClick={closeSidebar}>
           <MdOutlineClose size={24} />

@@ -7,6 +7,7 @@
   margin-top: 30px;
   .area-top-title {
     color: var(--text-color-inverted);
+    margin-bottom: 16px;
   }
 
   .area-top-l {
@@ -27,43 +28,92 @@
     }
   }
 
-  .input-lable{
-    color: var(--base-text-color);
+  .filters-wrapper {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    padding: 16px 16px 16px 16px;
+    border-radius: 5px;
+    box-shadow: var(--light-shadow1);
 
+    @media (max-width: 768px) {
+      padding: 12px;
+    }
+
+    .filter-container {
+      display: grid;
+      column-gap: 22px;
+      grid-template-columns: auto auto auto;
+    }
+
+    .filter {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      input {
+        width: 130px;
+        height: 36px;
+        padding: 0 10px;
+        font-size: 13px;
+        border-radius: 4px;
+        outline: none;
+        color: var(--base-text-color);
+        // background-color: var(--light-color);
+      }
+
+      .input-label {
+        font-weight: 500;
+        color: var(--base-text-color);
+      }
+
+      .date-input,
+      .text-input {
+        width: 200px;
+        height: 36px;
+        padding: 0 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+        // background-color: var(--light-color);
+
+        &:focus {
+          border-color: var(--primary-color);
+        }
+
+        &::placeholder {
+          color: #bbb;
+        }
+      }
+    }
   }
 
-input {
-  width: 240px;
-  height: 30px;
-  margin-left: 5px;
-  text-indent: 10px;
-  font-size: 18px;
-  border: 1px solid var(--base-text-color);
-  outline: none;
-//  box-shadow: var(--text-color-inverted);
- background-color: var(--secondary-color);
-  // border-color: var(--secondary-color);
-  // outline: var(--secondary-color);
-  // background-color: var(--secondary-color);
-  // border-color: var(--secondary-color);
-  // border-radius: 10px;
-  // outline: var(--secondary-color);
-  // box-shadow: none;
-  box-shadow: var(--light-shadow1);
-  color: var(--base-text-color);
+  .input-lable {
+    color: var(--base-text-color);
+  }
 
-}
+  .load-btn {
+    padding: 8px 20px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--primary-color);
+    border: none;
+    cursor: pointer;
+    align-self: last baseline;
+    margin-bottom: 1px;
+  }
 
-input:focus {
-  // border: none;
-  outline: none;
-}
-
-::placeholder {
-  color:  var(--base-text-color);
-  opacity: 0.5;
-  font-size: 14px;
-}
+  ::placeholder {
+    color: var(--base-text-color);
+    opacity: 0.5;
+    font-size: 14px;
+  }
 
   // react-date-range plugin theme customization
   .date-range-wrapper {
@@ -142,10 +192,5 @@ input:focus {
         color: var(--base-text-color);
       }
     }
-  }
-  .load-btn{
-    background-color: var(--primary-color);
-    color: var(--light-color);
-    box-shadow: 0px 0px 4px rgba(71, 91, 232, 0.04);
   }
 }
