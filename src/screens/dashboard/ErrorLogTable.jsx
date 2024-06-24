@@ -6,7 +6,7 @@ const columns = [
     {
         title: 'Sr No',
         dataIndex: 'id',
-        key: 'id',
+        key: 'id', 
         render: (text, record, index) => index + 1,
         sorter: (a, b) => a.number - b.number,
       },
