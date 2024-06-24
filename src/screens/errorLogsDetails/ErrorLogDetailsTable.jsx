@@ -53,7 +53,7 @@ function ErrorLogDetailsTable({ data }) {
     return (
         <section className="content-area-table">
             <Table
-                dataSource={[...data,...data,...data,...data]}
+                dataSource={data}
                 columns={columns}
                 pagination={{ pageSize: 5 }}
             />

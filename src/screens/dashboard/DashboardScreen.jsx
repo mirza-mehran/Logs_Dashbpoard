@@ -5,6 +5,7 @@ import ErrorLogTable from "./ErrorLogTable";
 import HealthCheckTable from "./HealthCheckTable";
 import TraceLogsTable from "./TraceLogsTable";
 import dayjs from "dayjs";
+import { Base_url } from '../../constants/url';
 
 let currentDate = dayjs();
 let formattedDate = currentDate.format('YYYY-MM-DD');
@@ -25,12 +26,12 @@ const Dashboard = () => {
 
 
   const fetchDataFromApi = async (filter, endpoint) => {
-    const url = `https://localhost:60266/api/Logs/${endpoint}`;
+    const url = `${Base_url}/api/Logs/${endpoint}`;
     try {
       const response = await axios.get(url,
         {
           params: {
-            StartDate:  filter?.StartDate || formattedDate,
+            StartDate:  filter?.StartDate || '2024-05-26' || formattedDate,
             EndDate: filter?.EndDate|| formattedDate,
             ...(filter?.ApplicationName && { ApplicationName :filter?.ApplicationName }),
             ...(filter?.ClientId && { ClientId: filter?.ClientId }),
@@ -92,7 +93,9 @@ const Dashboard = () => {
     }
   };
   useEffect(() => {
-    handleButtonClick()
+    if(!errorLogs){
+      handleButtonClick()
+    }
   }, [])
   return (
     <div className="content-area">

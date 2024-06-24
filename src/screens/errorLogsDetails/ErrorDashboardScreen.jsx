@@ -4,6 +4,7 @@ import ErrorLogTable from "./ErrorLogDetailsTable";
 import axios from 'axios';
 import dayjs from "dayjs";
 import { useParams } from "react-router-dom";
+import { Base_url } from "../../constants/url";
 
 
 
@@ -21,7 +22,7 @@ const Dashboard = () => {
 
 
   const fetchDataFromApi = async (filter, endpoint) => {
-    const url = `https://localhost:60266/api/Logs/${endpoint}`;
+    const url = `${Base_url}/api/Logs/${endpoint}`;
     try {
       const response = await axios.get(url,
         {
