@@ -51,6 +51,7 @@ const Sidebar = () => {
       <div className="sidebar-top">
         <div className="sidebar-brand">
           <img  className="sidebar-brand-logo" src={theme === LIGHT_THEME ? LogoBlue : LogoWhite} alt="" />
+          <img className="sidebar-brand-logo"  src={theme === LIGHT_THEME ? Logo : Logo} alt="logo" />
           {/* <span >Dashboard</span> */}
         </div>
         <button className="sidebar-close-btn" onClick={closeSidebar}>
